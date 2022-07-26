@@ -15,5 +15,5 @@ Build Product assets: `npm run build`<br>
 Styling: `gulp watch`
 
 Deploys:
-Netlify: https://readquran.netlify.app
+Netlify: https://readquran.netlify.app<br>
 Github Pages: https://arifursdev.github.io/quran-app-vue
