@@ -1,0 +1,18 @@
+.skip-to-content-link {
+    position: absolute !important;
+    left: -10px;
+    top: 10px;
+    overflow: hidden;
+    transform: translateX(-100%);
+    transition: 0.2s transform ease-in-out;
+    opacity: 0;
+    
+    &:focus {
+        left: 10px;
+        height: auto;
+        width: auto;
+        transform: translateX(0%);
+        transition: 0.2s transform ease-in-out;
+        opacity: 1;
+    }
+}

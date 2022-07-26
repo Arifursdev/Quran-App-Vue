@@ -1,0 +1,103 @@
+$modal__overlay: rgba(0,0,0,0.5);
+$modal__popup_bg: var(--secondary-color);
+$modal__popup_brdr: var(--border-color);
+$modal__color:var(--text-color);
+$modal__close_brdr: var(--border-color);
+$modal__close_color: var(--gray-color);
+$modal__border_radius:6px;
+
+.popup-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $modal__overlay;
+    text-align: center;
+    overflow: auto;
+    padding: 20px 10px;
+    z-index: 999;
+    cursor: pointer;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.2s all ease-in-out;
+
+    &::before {
+        content: "";
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        margin-right: -0.05em;
+    }
+
+    &.opened {
+        visibility: visible;
+        opacity: 1;
+        transition: 0.2s all ease-in-out;
+    }
+
+    .popup {
+        width: 96%;
+        vertical-align: middle;
+        max-width: 700px;
+        margin: 0 auto;
+        position: relative;
+        display: inline-block;
+        background: $modal__popup_bg;
+        border: 2px solid $modal__popup_brdr;
+        border-radius: $modal__border_radius;
+        cursor: initial;
+        transform: translateY(10px);
+        transition: 0.2s all ease-in-out;
+    }
+
+    &.opened .popup{
+        transform: none;
+        transition: 0.2s all ease-in-out;
+    }
+
+    .popup-header {
+        color: $modal__color;
+        border-bottom: 1px solid $modal__popup_brdr;
+        min-height: 50px;
+        text-align: left;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+        font-weight: 600;
+        padding-right: 60px;
+
+        button.close-popup {
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            background: $modal__popup_bg;
+            border: 1px solid $modal__close_brdr;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            right: 16px;
+            color: $modal__close_color;
+            cursor: pointer;
+            border-radius: $modal__border_radius;
+        }
+        
+        button.close-popup svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        button.close-popup:hover {
+            color: $modal__color;
+        }
+    }
+
+    .popup-content {
+        padding: 20px;
+        text-align: initial;
+    }
+}

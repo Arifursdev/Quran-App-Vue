@@ -1,0 +1,27 @@
+$badge__default: #f1f1f1;
+$badge__default_color: #000;
+
+$badge__paid: #c4f4bf;
+$badge__paid_color: #000;
+
+$badge__unfulfilled: #f2f1bc;
+$badge__unfulfilled_color: #000;
+
+
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 12px;
+    background: $badge__default;
+    color: $badge__default_color;
+    border-radius: 6px;
+    line-height: normal;
+    &.badge-paid {
+        background: $badge__paid;
+        color: $badge__paid_color;
+    }
+    &.badge-unfulfilled {
+        background: $badge__unfulfilled;
+        color: $badge__unfulfilled_color;
+    }
+}

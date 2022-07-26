@@ -1,0 +1,105 @@
+.popup-wrapper .popup.search__ayah-popup {
+    max-width: 1000px;
+}
+
+.popup-wrapper .popup-content.search__ayah-popup-content {
+    padding: 0;
+}
+
+
+.search__ayah {
+
+    .search__ayah-field {
+        width: 100%;
+        padding: 15px;
+        background: var(--secondary-color);
+        border-bottom: 1px solid var(--border-color);
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .search__ayah-field input {
+        width: 100%;
+        height: 50px;
+        background: var(--secondary-color);
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
+        padding: 5px 15px;
+        &::placeholder {
+            color: var(--gray-color);
+        }
+    }
+
+    .search__ayah-results {
+        padding: 15px 25px;
+
+        .results__count {
+            font-size: 15px;
+            color: var(--gray-color);
+        }
+
+        .verse {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            &:first-child {
+                padding-top: 15px;
+            }
+        }
+        
+        .verse__from {
+            font-weight: 600;
+            color: var(--text-color);
+            padding: 10px 20px;
+            background: var(--light-secondary);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .verse__arabic {
+            margin-bottom: 15px;
+            text-align: right;
+            @media (prefers-color-scheme: dark) {
+                & {
+                    filter: invert(1);
+                }
+            }
+        }
+        
+        .verse__translations {
+        }
+        
+        .verse__translation {
+            margin-bottom: 20px;
+        }
+        
+        .verse__translations .verse__translation:last-child {
+            margin-bottom: 0;
+        }
+        
+        .verse__translation p {
+            font-size: 17px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: var(--text-color);
+            line-height: 1.7em;
+        }
+        
+        .verse__translation span {
+            color: var(--gray-color);
+        }
+        
+        .verse:last-child {
+            border: 0;
+        }
+
+    }
+
+    
+
+    
+}
+
+html.mode\:dark .search__ayah .search__ayah-results .verse__arabic {
+    filter: invert(1);
+}

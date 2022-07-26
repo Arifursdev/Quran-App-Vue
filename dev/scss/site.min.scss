@@ -1,0 +1,30 @@
+html, body {
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+     
+    &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+    }
+     
+    &::-webkit-scrollbar-thumb {
+      background-color: #888;
+    }
+}
+
+#app {
+    width: 100%;
+    height: 100vh;
+    
+    @media (min-width:992px) {
+     & {
+        overflow: hidden;
+     } 
+    }
+}
+
+@import './components/header.scss';
+@import './components/main.scss';
+@import './components/chapters.scss';
+@import './components/surah.scss';
+@import './components/search-popup.scss';

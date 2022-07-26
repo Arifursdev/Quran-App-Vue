@@ -1,0 +1,170 @@
+/** 
+ * Below 599px 
+*/
+
+$h1_size: 32px;
+$h1_lh: 1.7em;
+
+$h2_size: 24px;
+$h2_lh: 1.7em;
+
+$h3_size: 20px;
+$h3_lh: 1.7em;
+
+$h4_size: 18px;
+$h4_lh: 1.7em;
+
+$h5_size: 16px;
+$h5_lh: 1.7em;
+
+$h6_size: 14px;
+$h6_lh: 1.7em;
+
+h1 {
+    font-size: $h1_size;
+    margin: 10px 0;
+    line-height: $h1_lh;
+}
+
+h2 {
+    font-size: $h2_size;
+    margin: 10px 0;
+    line-height: $h2_lh;
+}
+
+h3 {
+    font-size: $h3_size;
+    margin: 10px 0;
+    line-height: $h3_lh;
+}
+
+h4 {
+    font-size: $h4_size;
+    margin: 10px 0;
+    line-height: $h4_lh;
+}
+
+h5 {
+    font-size: $h5_size;
+    margin: 10px 0;
+    line-height: $h5_lh;
+}
+
+h6 {
+    font-size: $h6_size;
+    margin: 10px 0;
+    line-height: $h6_lh;
+}
+
+
+
+/** 
+ * Above 600px 
+*/
+
+$h1_size: 38px;
+$h1_lh: 1.7em;
+
+$h2_size: 32px;
+$h2_lh: 1.7em;
+
+$h3_size: 24px;
+$h3_lh: 1.7em;
+
+$h4_size: 20px;
+$h4_lh: 1.7em;
+
+$h5_size: 18px;
+$h5_lh: 1.7em;
+
+$h6_size: 16px;
+$h6_lh: 1.7em;
+
+
+@media (min-width:600px) {
+    
+    h1 {
+        font-size: $h1_size;
+        line-height: $h1_lh;
+    }
+
+    h2 {
+        font-size: $h2_size;
+        line-height: $h2_lh;
+    }
+
+    h3 {
+        font-size: $h3_size;
+        line-height: $h3_lh;
+    }
+
+    h4 {
+        font-size: $h4_size;
+        line-height: $h4_lh;
+    }
+
+    h5 {
+        font-size: $h5_size;
+        line-height: $h5_lh;
+    }
+
+    h6 {
+        font-size: $h6_size;
+        line-height: $h6_lh;
+    }
+}
+
+$h1_size: 56px;
+$h1_lh: 1.7em;
+
+$h2_size: 44px;
+$h2_lh: 1.7em;
+
+$h3_size: 32px;
+$h3_lh: 1.7em;
+
+$h4_size: 22px;
+$h4_lh: 1.7em;
+
+$h5_size: 18px;
+$h5_lh: 1.7em;
+
+$h6_size: 16px;
+$h6_lh: 1.7em;
+
+/** 
+ * Below 1024px 
+*/
+
+@media (min-width:1024px) {
+    
+    h1 {
+        font-size: $h1_size;
+        line-height: $h1_lh;
+    }
+
+    h2 {
+        font-size: $h2_size;
+        line-height: $h2_lh;
+    }
+
+    h3 {
+        font-size: $h3_size;
+        line-height: $h3_lh;
+    }
+
+    h4 {
+        font-size: $h4_size;
+        line-height: $h4_lh;
+    }
+
+    h5 {
+        font-size: $h5_size;
+        line-height: $h5_lh;
+    }
+
+    h6 {
+        font-size: $h6_size;
+        line-height: $h6_lh;
+    }
+}

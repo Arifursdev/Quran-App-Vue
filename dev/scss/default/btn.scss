@@ -1,0 +1,209 @@
+/** 
+ * Button 
+*/
+
+// ! Primary
+// Default
+$btn_background: #1b74e4;
+$btn_text_color:#fff;
+$btn_disabled_text_color:#fff;
+$btn_loading_bar_color:#fff;
+// Hover
+$btn_background_hover: #1A6ED8;
+$btn_text_color_hover:#fff;
+$btn_disabled_hover_text_color:#d6e5fa;
+$btn_hover_loading_bar_color:#fff;
+// Extra
+$btn_padding:12px 16px;
+$btn_border:0px;
+$btn_transition:0.2s all ease-in-out;
+$btn_font_size:14px;
+$btn_font_weight:500;
+$btn_radius:5px;
+
+// ! Alt Button
+// Default
+$btn_background_alt: #e4e6eb;
+$btn_text_color_alt:#000;
+$btn_disabled_text_color_alt:#999;
+$btn_loading_bar_color_alt:#c4c6ca;
+// Hover
+$btn_background_alt_hover: #D8DADF;
+$btn_text_color_alt_hover:#000;
+$btn_disabled_hover_text_color_alt:#888;
+$btn_hover_loading_bar_color_alt:#c4c6ca;
+// Extra
+$btn_padding_alt:12px 16px;
+$btn_border_alt:0px;
+$btn_transition_alt:0.2s all ease-in-out;
+$btn_font_size_alt:14px;
+$btn_font_weight_alt:500;
+$btn_radius_alt:5px;
+
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+  cursor: pointer;
+}
+
+.btn-margin {
+  margin: 2.5px;
+}
+
+.btns-row {
+  margin: 0 -2.5px;
+}
+/** 
+ * Primary   
+ */
+.btn {
+  display: inline-block;
+  position: relative;
+  padding: $btn_padding;
+  border: 0;
+  line-height: normal;
+  background: $btn_background;
+  color: $btn_text_color;
+  font-size: $btn_font_size;
+  border: $btn_border;
+  min-height: auto;
+  min-width: 120px;
+  transition: $btn_transition;
+  text-decoration: none;
+  font-weight: $btn_font_weight;
+  border-radius: $btn_radius;
+  text-align: center;
+  vertical-align: middle;
+
+  &.no-transition {
+    transition: 0s;
+  }
+
+  &.btn-small {
+    min-width: auto;
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  &[disabled] {
+    opacity: 0.9;
+    color: $btn_disabled_text_color;
+
+    &:hover {
+      color: $btn_disabled_hover_text_color;
+    }
+
+    &.alt {
+      color: $btn_disabled_text_color_alt;
+      &:hover {
+        color: $btn_disabled_hover_text_color_alt;
+      }
+    }
+
+  }
+
+  &.block {
+    display: block;
+    width: 100%;
+  }
+
+  &:hover {
+    background: $btn_background_hover;
+    color: $btn_text_color_hover;
+  }
+
+  &:active:focus {
+    background: $btn_background_hover;
+    color: $btn_text_color_hover;
+    transform: translate(0, 2px);
+  }
+
+  &:focus {
+    background: $btn_background_hover;
+    color: $btn_text_color_hover;
+  }
+
+  /** 
+   * Secondary alt 
+   */
+  &.alt {
+    padding: $btn_padding_alt;
+    background: $btn_background_alt;
+    color: $btn_text_color_alt;
+    font-size: $btn_font_size_alt;
+    border: $btn_border_alt;
+    transition: $btn_transition_alt;
+    font-weight: $btn_font_weight_alt;
+    border-radius: $btn_radius_alt;
+    
+    &.btn-small {
+      min-width: auto;
+      padding: 5px 10px;
+      font-size: 11px;
+    }
+    
+    &:hover {
+      background: $btn_background_alt_hover;
+      color: $btn_text_color_alt_hover;
+    }
+  
+    &:active:focus {
+      background: $btn_background_alt_hover;
+      color: $btn_text_color_alt_hover;
+      transform: translate(0, 2px);
+    }
+  
+    &:focus {
+      background: $btn_background_alt_hover;
+      color: $btn_text_color_alt_hover;
+    }
+  }
+
+
+  /** 
+   * Loading 
+  */
+  span {
+    display: inline-block;
+    transition: .1s all ease-in-out;
+  }
+
+  &.loading {
+    span {
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.2s all ease;
+      transform: scale(0);
+    }
+    &::before {
+      content: '';
+      width: 20px;
+      height: 20px;
+      border: 2px solid $btn_loading_bar_color;
+      display: inline-block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border-top-color: transparent;
+      transition: 0.2s all ease;
+      animation: rotate 1s infinite linear;
+      transform-origin: center;
+    }
+    &:hover::before {
+      border: 2px solid $btn_hover_loading_bar_color;
+      border-top-color: transparent;
+    }
+  }
+
+  &.alt.loading{
+    &::before {
+      border: 2px solid $btn_loading_bar_color_alt;
+      border-top-color: transparent;
+    }
+    &:hover::before {
+      border: 2px solid $btn_hover_loading_bar_color_alt;
+      border-top-color: transparent;
+    }
+  }
+
+}

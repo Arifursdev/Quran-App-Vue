@@ -1,0 +1,61 @@
+<template>
+  <Header/>
+  
+  <main class="main-content" id="main">
+    <Chapters v-if="showChapters"/>
+    <Surah v-if="currentSurahIsNotNull"/>
+  </main>
+
+  <Overlay/>
+</template>
+
+<script>
+import Header from './components/Header.vue'
+import Chapters from './components/Chapters.vue'
+import Surah from './components/Surah.vue'
+import Overlay from './components/Overlay.vue'
+
+export default {
+  name: 'App',
+  components: {
+    Header,
+    Chapters,
+    Surah,
+    Overlay,
+  },
+  computed: {
+      currentSurahIsNotNull(){
+        return this.$store.getters.getCurrentSurah !== null;
+      },
+      showChapters(){
+        if(window.outerWidth < 992) {
+          return this.$store.getters.getCurrentSurah === null;
+        }
+        
+        return true;
+      }
+  },
+  created(){
+    var app = this;
+
+    app.axios.get( 'https://api.quran.com/api/v3/chapters' )
+    .then(function(resp){
+      app.$store.commit('setChapter', resp.data.chapters)
+    })
+    .catch(function(error){
+      console.log(error);
+    });
+
+    if(window.outerWidth < 992) {
+      let url = new URL(window.location);
+      var id = url.searchParams.get('id');
+      if(id !== null) {
+        id = parseInt(id)
+        id = id > 0 && id < 115 ? id : 1;
+        app.$store.commit('setCurrentSurah', id)
+      }
+    }
+
+  }
+}
+</script>

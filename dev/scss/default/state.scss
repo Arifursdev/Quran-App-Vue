@@ -1,0 +1,58 @@
+$state__padding: 15px;
+$state__icon-size: 30px;
+$state__max-width: 300px;
+
+$state__title: 15px;
+$state__title_space: 15px;
+$state__title_line-height: 1.6em;
+
+$state__details: 12px;
+$state__details_space: 5px;
+$state__details_line-height: 1.6em;
+
+
+@keyframes rotate360 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.state {
+    padding: $state__padding;
+
+    .state__icon {
+        text-align: center;
+        display: block;
+        width: $state__icon-size;
+        height: $state__icon-size;
+        margin: 0 auto;
+        animation: rotate360 1s infinite linear;
+        svg {
+            width: $state__icon-size;
+            height: $state__icon-size;
+        }
+    }
+    
+    .state__title {
+        display: block;
+        text-align: center;
+        font-size: $state__title;
+        font-weight: 500;
+        margin-top: $state__title_space;
+        line-height: $state__title_line-height;
+    }
+    
+    .state__details {
+        text-align: center;
+        font-size: $state__details;
+        line-height: $state__details_line-height;
+        max-width: $state__max-width;
+        margin: 0 auto;
+        margin-top: $state__details_space;
+    }
+}
+
+

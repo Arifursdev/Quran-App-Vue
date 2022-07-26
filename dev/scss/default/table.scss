@@ -1,0 +1,28 @@
+$table_bg:#fff;
+$table_brdr:#ddd;
+$table_th:#f2f2f2;
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.table {
+    background: $table_bg;
+    border: 1px solid $table_brdr;
+    border-collapse: collapse;
+    width: 100%;
+
+    th {
+        background-color: $table_th;
+    }
+    
+    td, th {
+        border: 1px solid $table_brdr;
+        padding: 5px 10px;
+        text-align: center;
+        font-weight: normal;
+        font-size: 14px;
+    }
+
+}

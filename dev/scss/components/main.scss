@@ -1,0 +1,11 @@
+.main-content {
+    width: 100%;
+    height: calc(100vh - 70px);
+    display: flex;
+    @media (max-width:991px) {
+     & {
+        display: block;
+        height: auto;
+     } 
+    }
+}

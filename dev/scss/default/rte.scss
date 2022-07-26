@@ -1,0 +1,93 @@
+.rte {
+    word-break: break-word;
+    &::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+    
+    iframe {
+        max-width: 100%;
+    }
+    
+    img {
+        display: block;
+        margin: 0 auto;
+    }
+    
+    p:not(:last-child),
+    ul:not(:last-child),
+    ol:not(:last-child) {
+        margin-bottom: 1.6em;
+    }
+    
+    img,
+    blockquote {
+        margin-top: 2.4em;
+        margin-bottom: 2.4em;
+    }
+    
+    ul,
+    ol {
+        margin-left: 30px;
+        padding-left: 0;
+        list-style-position: outside;
+    }
+    
+    li {
+        padding: 5px 0;
+    }
+    
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        transition: color 0.2s ease-in-out;
+    }
+    
+    h1 {
+        margin: 15px 0 10px;
+    }
+    
+    h2 {
+        margin: 15px 0 10px;
+    }
+    
+    h3 {
+        margin: 15px 0 10px;
+    }
+    
+    h4 {
+        margin: 15px 0 10px;
+    }
+    
+    h5 {
+        margin: 15px 0 10px;
+    }
+    
+    h6 {
+        margin: 15px 0 10px;
+    }
+    
+    blockquote {
+        margin-left: 0;
+        padding: 6px 0 6px 30px;
+        font-size: 1.15em;
+        border-left: 3px solid #f2f2f2;
+    }
+    
+    p:last-child,
+    blockquote:last-child,
+    ul:last-child,
+    ol:last-child,
+    h1:last-child,
+    h2:last-child,
+    h3:last-child,
+    h4:last-child,
+    h5:last-child,
+    h6:last-child {
+        margin-bottom: 0;
+    }
+}
