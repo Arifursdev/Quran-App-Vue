@@ -13,3 +13,7 @@ Preview index.html in the browser: `npm run watch`<br>
 Build Product assets: `npm run build`<br>
 
 Styling: `gulp watch`
+
+Deploys:
+Netlify: https://readquran.netlify.app
+Github Pages: https://arifursdev.github.io/quran-app-vue
