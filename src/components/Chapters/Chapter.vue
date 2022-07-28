@@ -1,5 +1,5 @@
 <template>
-  <div class="chapter__item" @click="selectSurah(chapter.chapter_number)" :class="isCurrentSurah === chapter.chapter_number ? 'active' : ''">
+  <div :data-id="chapter.chapter_number" class="chapter__item" @click="selectSurah(chapter.chapter_number)" :class="isCurrentSurah === chapter.chapter_number ? 'active' : ''">
         <span class="chapter__no">{{ chapter.chapter_number }}</span>
         <span class="chapter__name">{{ chapter.name_simple }}</span>
         <p class="chapter__name-translation">{{ chapter.translated_name.name }}</p>
@@ -19,12 +19,36 @@ export default {
       let url = new URL(window.location);
       url.searchParams.set('id', id);
       window.history.pushState({}, '', url);
+    },
+    setSurahPosition(id){
+        let list = document.querySelector('.chapters__list')
+        let chapter = document.querySelector('.chapter__item[data-id="'+ id +'"]')
+        
+        if(chapter) {
+            list.scroll({
+                top: chapter.offsetTop - 20,
+                left: 0,    
+                behavior: 'smooth'
+            });
+        }
     }
   },
   computed: {
     isCurrentSurah(){
       return this.$store.getters.getCurrentSurah
+    },
+    currentSurah(){
+        return this.$store.getters.getCurrentSurah;
     }
+  },
+  watch: {
+    currentSurah(newValue, oldValue){
+        this.setSurahPosition(newValue)
+    }
+  },
+  mounted(){
+    let currentSurah = this.$store.getters.getCurrentSurah
+    this.setSurahPosition(currentSurah)
   }
 }
 </script>

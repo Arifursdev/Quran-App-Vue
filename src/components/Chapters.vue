@@ -3,9 +3,9 @@
         <Topbar/>
 
         <div class="chapters__list">
-            <Loading v-if="!ChaptersList.length"/>
-            <template v-if="ChaptersList.length">
-                <Chapter v-for="chapter in ChaptersList" :chapter="chapter" :key="chapter.id"/>
+            <Loading v-if="!chaptersList.length"/>
+            <template v-if="chaptersList.length">
+                <Chapter v-for="chapter in chaptersList" :chapter="chapter" :key="chapter.id"/>
             </template>
         </div>
 
@@ -25,12 +25,9 @@ export default {
         Loading
     },
     computed: {
-        ChaptersList(){
+        chaptersList(){
             return this.$store.getters.getChapters;
         }
-    },
-    created(){
-        console.log('chapters created');
     }
 }
 </script>

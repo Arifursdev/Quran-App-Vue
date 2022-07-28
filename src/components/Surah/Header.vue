@@ -24,7 +24,6 @@ export default {
     name: "Header",
     components: {
         Loading,
-
     },
     computed: {
         surahInfo(){
@@ -43,7 +42,6 @@ export default {
                 return item.id === currentSurah;
             })
 
-            console.log(chapterInfo[0]);
             return chapterInfo[0];
         }
     }
