@@ -42,6 +42,10 @@ export default {
                 return item.id === currentSurah;
             })
 
+            if(!chapterInfo.length) {
+                return null;
+            }
+
             return chapterInfo[0];
         }
     }
