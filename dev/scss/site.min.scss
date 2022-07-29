@@ -12,6 +12,10 @@ html, body {
     }
 }
 
+html.mode\:dark .invert_if_dark {
+    filter: invert(1);
+}
+
 #app {
     width: 100%;
     height: 100vh;

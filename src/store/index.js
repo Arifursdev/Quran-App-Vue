@@ -6,6 +6,7 @@ const store = createStore({
       currentSurah: window.outerWidth > 992 ? 1 : null,
       chaptersList: [],
       chaptersData: [],
+      searchQuery: '',
     }
   },
   getters: {
@@ -13,7 +14,16 @@ const store = createStore({
       return state.currentSurah;
     },
     getChapters: (state) => {
-      return state.chaptersList;
+      var query = state.searchQuery;
+      if(query === '') {
+        return state.chaptersList;
+      }
+
+      var results = state.chaptersList.filter(chapter => {
+        return chapter.name_simple.toLowerCase().includes(query.toLowerCase()) 
+      });
+
+      return results;
     },
     getChapterDataByID: (state) => (id) => {
       id = parseInt(id),
@@ -31,6 +41,9 @@ const store = createStore({
     },
     setSurah(state, payload) {
       state.chaptersData[payload.id] = payload.data
+    },
+    setSearchQuery(state, payload) {
+      state.searchQuery = payload
     }
   },
   actions: {

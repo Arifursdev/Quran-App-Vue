@@ -18,7 +18,7 @@
         </div>
 
         <div class="verse__content">
-            <div class="verse__arabic">
+            <div class="verse__arabic invert_if_dark">
             <img class="lazyload" :data-src="'https://df61994948e9a54a5259-ad04094bac72ed4d481dba65a1920e88.ssl.cf1.rackcdn.com/'+ verse.verse_key.replace(':', '_') +'.png'" alt="">
             </div>
             <div class="verse__translations">

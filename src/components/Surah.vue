@@ -1,6 +1,6 @@
 <template>
   <div class="surah-wrapper">
-    <Header/>
+    <SurahHeader/>
 
     <div class="surah__verses">
       <Loading v-if="!currentSurahVerses"/>
@@ -14,14 +14,14 @@
 
 <script>
 import Loading from './Loading.vue'
-import Header from './Surah/Header.vue'
+import SurahHeader from './Surah/SurahHeader.vue'
 import Verse from './Surah/Verse.vue'
 
 export default {
     name: "Surah",
     components: {
       Loading,
-      Header,
+      SurahHeader,
       Verse
     },
     computed: {

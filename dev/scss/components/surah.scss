@@ -198,11 +198,6 @@
             width: 100%;
             text-align: right;
             margin-bottom: 15px;
-            @media (prefers-color-scheme: dark) {
-                & {
-                    filter: invert(1);
-                }
-            }
         }
         
         .verse__translations {
@@ -247,9 +242,4 @@
     
 
     
-}
-
-
-html.mode\:dark .surah-wrapper .surah__verse .verse__arabic {
-    filter: invert(1);
 }
