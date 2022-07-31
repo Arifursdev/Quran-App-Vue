@@ -148,16 +148,23 @@
         background: var(--background);
         position: relative;
 
+        .chapters__sorted-by {
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: var(--gray-color);
+            text-transform: uppercase;
+        }
+
         &::-webkit-scrollbar {
             width: 8px;
         }
          
         &::-webkit-scrollbar-track {
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+            background-color: var(--scrollbar-bg);
         }
          
         &::-webkit-scrollbar-thumb {
-          background-color: #888;
+          background-color: var(--scrollbar-bar);
         }
 
         .chapter__item {

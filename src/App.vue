@@ -46,9 +46,9 @@ export default {
     },
     urlParamRoute(){
       let app = this
-      
+      let url = new URL(window.location);
+
       if(window.outerWidth < 992) {
-        let url = new URL(window.location);
         var id = url.searchParams.get('id');
 
         if(id !== null) {
@@ -57,6 +57,7 @@ export default {
           app.$store.commit('setCurrentSurah', id)
         }
       }
+
     }
   },
   computed: {

@@ -16,4 +16,4 @@ Styling: `gulp watch`
 
 Deploys:
 Netlify: https://readquran.netlify.app <br>
-Github Pages: https://arifursdev.github.io/quran-app-vue
+Github Pages: https://arifursdev.github.io/Quran-App-Vue/

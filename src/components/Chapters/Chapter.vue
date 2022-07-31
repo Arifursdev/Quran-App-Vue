@@ -35,15 +35,21 @@ export default {
   },
   computed: {
     isCurrentSurah(){
-      return this.$store.getters.getCurrentSurah
+        return this.$store.getters.getCurrentSurah
     },
     currentSurah(){
         return this.$store.getters.getCurrentSurah;
+    },
+    sortChanges(){
+        return this.$store.getters.getSort;
     }
   },
   watch: {
     currentSurah(newValue, oldValue){
         this.setSurahPosition(newValue)
+    },
+    sortChanges(newValue, oldValue){
+      this.setSurahPosition(this.currentSurah)
     }
   },
   mounted(){
