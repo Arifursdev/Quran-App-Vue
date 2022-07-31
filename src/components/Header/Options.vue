@@ -19,13 +19,25 @@ export default {
     name: "Options",
     methods: {
         toggleDarkMode(){
-            let html = document.querySelector('html')
-            if(html.classList.contains('mode:light')) {
-                html.classList.remove('mode:light')
-                html.classList.add('mode:dark')
+            let htmlClass = document.querySelector('html').classList
+
+            var userSelected = localStorage.getItem('dark_mode_enabled')
+
+            if(userSelected !== null) {
+                let value = userSelected === 'true' ? 'false' : 'true';
+                localStorage.setItem('dark_mode_enabled', value)
             } else {
-                html.classList.add('mode:light')
-                html.classList.remove('mode:dark')
+                let value = htmlClass.contains('mode:light') ? 'true' : 'false'
+                localStorage.setItem('dark_mode_enabled', value)
+            }
+            
+
+            if(htmlClass.contains('mode:light')) {
+                htmlClass.remove('mode:light')
+                htmlClass.add('mode:dark')
+            } else {
+                htmlClass.add('mode:light')
+                htmlClass.remove('mode:dark')
             }
         }
     }

@@ -41,9 +41,7 @@ export default {
     },
     methods: {
         setActiveSort(name){
-            
             this.sortOptions = this.sortOptions.map(option => {
-
                 if(option.name === name) {
                     option.active = true
                 } else {
@@ -68,8 +66,6 @@ export default {
     },
     watch: {
         storedSortOption(newValue, oldValue){
-            console.log(newValue);
-            
             this.sortOptions = this.sortOptions.map(option => {
 
                 if(option.name === newValue) {

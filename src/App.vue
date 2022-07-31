@@ -26,6 +26,13 @@ export default {
   methods: {
     colorScheme(){
       var classList = document.querySelector('html').classList;
+
+      var userSelected = localStorage.getItem('dark_mode_enabled')
+      if(userSelected !== null) {
+        userSelected === 'true' ? (classList.remove('mode:light'), classList.add('mode:dark')) : (classList.remove('mode:dark'), classList.add('mode:light'))
+        return;
+      }
+
       if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
           classList.remove('mode:light')
           classList.add('mode:dark')
