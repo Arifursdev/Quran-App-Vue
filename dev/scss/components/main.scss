@@ -9,3 +9,31 @@
      } 
     }
 }
+
+.go-to-top__wrapper {
+    position: fixed;
+    bottom: 0px;
+    right: 30px;
+    transform: translateY(100%);
+    transition: 0.2s all ease-in-out;
+    &.show {
+        bottom: 30px;
+        transform: translateY(0%);
+        transition: 0.2s all ease-in-out;
+    }
+}
+
+.go-to-top__wrapper button {
+    width: 45px;
+    height: 45px;
+    border: 0;
+    background: #282828;
+    color: #fff;
+    border-radius: 50%;
+    border: 1px solid #212121;
+}
+
+.go-to-top__wrapper button svg {
+    width: 20px;
+    height: 20px;
+}

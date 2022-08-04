@@ -23,13 +23,16 @@ export default {
     setSurahPosition(id){
         let list = document.querySelector('.chapters__list')
         let chapter = document.querySelector('.chapter__item[data-id="'+ id +'"]')
-        
+        var loaded;
         if(chapter) {
-            list.scroll({
-                top: chapter.offsetTop - 20,
-                left: 0,    
-                behavior: 'smooth'
-            });
+            clearTimeout(loaded);
+            loaded = setTimeout(function(){
+              list.scroll({
+                  top: chapter.offsetTop - 20,
+                  left: 0,    
+                  behavior: 'smooth'
+              });
+            }, 300) 
         }
     }
   },
@@ -54,7 +57,12 @@ export default {
   },
   mounted(){
     let currentSurah = this.$store.getters.getCurrentSurah
-    this.setSurahPosition(currentSurah)
+
+    this.$nextTick(() => {
+        this.setSurahPosition(currentSurah)
+    });
+
+    this.$emit('chapterItemLoaded')
   }
 }
 </script>
