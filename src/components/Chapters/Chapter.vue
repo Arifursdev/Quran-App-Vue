@@ -21,12 +21,13 @@ export default {
       window.history.pushState({}, '', url);
     },
     setSurahPosition(id){
-        let list = document.querySelector('.chapters__list')
         let chapter = document.querySelector('.chapter__item[data-id="'+ id +'"]')
         var loaded;
+        
         if(chapter) {
             clearTimeout(loaded);
             loaded = setTimeout(function(){
+              let list = document.querySelector('.chapters__list')
               list.scroll({
                   top: chapter.offsetTop - 20,
                   left: 0,    
@@ -61,8 +62,6 @@ export default {
     this.$nextTick(() => {
         this.setSurahPosition(currentSurah)
     });
-
-    this.$emit('chapterItemLoaded')
   }
 }
 </script>

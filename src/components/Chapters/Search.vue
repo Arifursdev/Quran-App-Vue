@@ -10,20 +10,15 @@
 <script>
 export default {
     name: "Search",
-    data(){
-        return {
-            query: ''
-        }
-    },
     methods: {
         typing(e){
-            this.query = e.target.value;
+            let query = e.target.value;
+            this.$store.commit('setSearchQuery', query)
         }
     },
-    watch: {
+    computed: {
         query(){
-            let query = this.query;
-            this.$store.commit('setSearchQuery', query)
+            return this.$store.getters.getSearchQuery
         }
     }
 }

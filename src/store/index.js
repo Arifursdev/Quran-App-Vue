@@ -57,6 +57,9 @@ const store = createStore({
     },
     getSort(state){
       return state.sort;
+    },
+    getSearchQuery(state){
+      return state.searchQuery;
     }
   },
   mutations: {
