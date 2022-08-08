@@ -39,6 +39,7 @@ export default {
     },
     mounted(){
         let app = this
+        
         let url = new URL(window.location);
         var sort = url.searchParams.get('sortBy')
 

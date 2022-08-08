@@ -5,7 +5,14 @@
     <div class="surah__verses">
       <Loading v-if="!currentSurahVerses"/>
       <template v-if="currentSurahVerses">
+
         <Verse v-for="verse in currentSurahVerses" :verse="verse" :key="verse.verse_number"/>
+        
+        <div class="chapters__pagination">
+            <button type="button" @click="changeChapter('prev')" v-if="currentSurah > 0" class="prev__chapter"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M13.75 16.25a.74.74 0 0 1-.53-.22l-3.5-3.5a.75.75 0 0 1 0-1.06L13.22 8a.75.75 0 0 1 1.06 1l-3 3l3 3a.75.75 0 0 1 0 1.06a.74.74 0 0 1-.53.19Z"/></svg> Prev Chapter</button>
+            <button type="button" @click="changeChapter('next')" v-if="currentSurah < 113" class="next__chapter">Next Chapter <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M10.25 16.25a.74.74 0 0 1-.53-.25a.75.75 0 0 1 0-1.06l3-3l-3-3A.75.75 0 0 1 10.78 8l3.5 3.5a.75.75 0 0 1 0 1.06L10.78 16a.74.74 0 0 1-.53.25Z"/></svg></button>
+        </div>
+
       </template>
 
       <div class="go-to-top__wrapper" :class="showGoToTop ? 'show' : ''">
@@ -13,7 +20,6 @@
           <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20V4m-7 7l7-7l7 7"/></svg>
         </button>
       </div>
-      
       
     </div>
     
@@ -41,9 +47,31 @@ export default {
       goToTop(){
         window.scroll(0,0)
         document.querySelector('.surah-wrapper').scroll(0,0)
+      },
+      changeChapter(nextOrPrev = 'next'){
+        let app = this
+        let currentSurah = this.$store.getters.getCurrentSurah;
+        var chapters = this.$store.getters.getChapters;
+        var chaptersIds = chapters.map(chapter => chapter.id )
+
+        var surahIndex = chaptersIds.indexOf(currentSurah);
+        surahIndex = nextOrPrev === 'next' ? surahIndex + 1 : surahIndex - 1
+        var nextSurah = chaptersIds[surahIndex]
+
+        app.$store.commit('setCurrentSurah', nextSurah)
+
+        let url = new URL(window.location);
+        url.searchParams.set('id', nextSurah);
+        window.history.pushState({}, '', url);
       }
     },
     computed: {
+      currentSurah(){
+        let currentSurah = this.$store.getters.getCurrentSurah;
+        var chapters = this.$store.getters.getChapters;
+
+        return chapters.map(chapter => chapter.id ).indexOf(currentSurah)
+      },
       currentSurahVerses(){
         var app = this;
         let currentSurah = this.$store.getters.getCurrentSurah;
@@ -103,10 +131,14 @@ export default {
         } else {
           return currentSurahData;
         }
+
       }
     },
     mounted(){
       let self = this
+
+      window.scroll(0,0)
+      document.querySelector('.surah-wrapper').scroll(0,0)
 
       window.onscroll = (e) => {
         if(window.scrollY > 150) {

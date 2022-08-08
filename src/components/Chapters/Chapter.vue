@@ -1,5 +1,9 @@
 <template>
-  <div :data-id="chapter.chapter_number" class="chapter__item" @click="selectSurah(chapter.chapter_number)" :class="isCurrentSurah === chapter.chapter_number ? 'active' : ''">
+  <div 
+    :data-id="chapter.chapter_number" 
+    class="chapter__item" 
+    @click="selectSurah(chapter.chapter_number)" 
+    :class="isCurrentSurah === chapter.chapter_number ? 'active' : ''">
         <span class="chapter__no">{{ chapter.chapter_number }}</span>
         <span class="chapter__name">{{ chapter.name_simple }}</span>
         <p class="chapter__name-translation">{{ chapter.translated_name.name }}</p>
