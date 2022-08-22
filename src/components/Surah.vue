@@ -8,7 +8,7 @@
 
         <Verse v-for="verse in currentSurahVerses" :verse="verse" :key="verse.verse_number"/>
         
-        <div class="chapters__pagination">
+        <div class="chapters__pagination" v-if="showPagination">
             <button type="button" @click="changeChapter('prev')" v-if="currentSurah > 0" class="prev__chapter"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M13.75 16.25a.74.74 0 0 1-.53-.22l-3.5-3.5a.75.75 0 0 1 0-1.06L13.22 8a.75.75 0 0 1 1.06 1l-3 3l3 3a.75.75 0 0 1 0 1.06a.74.74 0 0 1-.53.19Z"/></svg> Prev Chapter</button>
             <button type="button" @click="changeChapter('next')" v-if="currentSurah < 113" class="next__chapter">Next Chapter <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M10.25 16.25a.74.74 0 0 1-.53-.25a.75.75 0 0 1 0-1.06l3-3l-3-3A.75.75 0 0 1 10.78 8l3.5 3.5a.75.75 0 0 1 0 1.06L10.78 16a.74.74 0 0 1-.53.25Z"/></svg></button>
         </div>
@@ -132,6 +132,13 @@ export default {
           return currentSurahData;
         }
 
+      },
+      showPagination(){
+        if(this.$store.getters.getSearchQuery !== '') {
+          return false;
+        }
+        
+        return true;
       }
     },
     mounted(){
