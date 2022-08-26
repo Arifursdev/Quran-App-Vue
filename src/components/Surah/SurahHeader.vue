@@ -46,14 +46,15 @@ export default {
             this.$store.commit('setCurrentSurah', null)
         },
         playSurah(){
-            var currentSurah = this.$store.getters.getCurrentSurah
+            var self = this
+            var currentSurah = self.$store.getters.getCurrentSurah
             if(currentSurah === null) {
                 return;
             }
 
-            this.playingSurah = !this.playingSurah
+            self.playingSurah = !self.playingSurah
             
-            let surahPlayer = this.$refs.surahPlayer;
+            let surahPlayer = self.$refs.surahPlayer;
 
             if (surahPlayer.paused) {
                 surahPlayer.play();
@@ -61,7 +62,11 @@ export default {
                 surahPlayer.pause();
             }
 
-            surahPlayer.addEventListener('timeupdate', function(e){
+            surahPlayer.addEventListener('ended', function(){
+                self.playingSurah = false
+            })
+
+            surahPlayer.addEventListener('timeupdate', function(){
                 var percent = surahPlayer.currentTime/ surahPlayer.duration * 100;
 
                 var mins = Math.floor(surahPlayer.currentTime / 60);
