@@ -1,0 +1,16 @@
+
+.settings-popup-inner {
+
+    .settings__item  {
+        label {
+            display: block;
+        }
+        input {
+            width: 100%;
+        }
+        &:not(:last-child):not(:only-child) {
+            margin-bottom: 15px;
+        }
+    }
+
+}

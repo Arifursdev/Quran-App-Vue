@@ -7,7 +7,8 @@ const store = createStore({
       chaptersList: [],
       chaptersData: [],
       searchQuery: '',
-      sort: 'ASC'
+      sort: 'ASC',
+      audioVolume: 1
     }
   },
   getters: {
@@ -60,6 +61,9 @@ const store = createStore({
     },
     getSearchQuery(state){
       return state.searchQuery;
+    },
+    getAudioVolume(state){
+      return state.audioVolume
     }
   },
   mutations: {
@@ -77,6 +81,9 @@ const store = createStore({
     },
     setSort(state, payload) {
       state.sort = payload
+    },
+    setAudioVolume(state, payload) {
+      state.audioVolume = payload
     }
   },
   actions: {

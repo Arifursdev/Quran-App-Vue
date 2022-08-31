@@ -32,6 +32,7 @@ $radio_active:#1b74e4;
  */
  input, select, textarea {
     outline: none;
+    accent-color: var(--main-color);
   }
  
  .form {

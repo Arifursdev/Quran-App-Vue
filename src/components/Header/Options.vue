@@ -8,15 +8,47 @@
         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36"><path fill="currentColor" d="M30 3H14v5h2V5h14c.6 0 1 .4 1 1v11c0 .6-.4 1-1 1H17v7h-5.3L8 27.9V25H5c-.6 0-1-.4-1-1V13c0-.6.4-1 1-1h13v-2H5c-1.7 0-3 1.3-3 3v11c0 1.7 1.3 3 3 3h1v5.1l6.3-5.1H19v-7h11c1.7 0 3-1.3 3-3V6c0-1.7-1.3-3-3-3z" class="clr-i-outline clr-i-outline-path-1"/><path fill="currentColor" d="M6.2 22.9h2.4l.6-1.6h3.1l.6 1.6h2.4L11.9 14H9.5l-3.3 8.9zm4.5-6.4l1 3.1h-2l1-3.1z" class="clr-i-outline clr-i-outline-path-2"/><path fill="currentColor" d="M20 17c1.1 0 2.6-.3 4-1c1.4.7 3 1 4 1v-2s-1 0-2.1-.4c1.2-1.2 2.1-3 2.1-5.6V8h-3V6h-2v2h-3v2h5.9c-.2 1.8-1 2.9-1.9 3.6c-.6-.5-1.2-1.2-1.6-2.1h-2.1c.4 1.3 1 2.3 1.8 3.1c-1 .4-1.9.4-2.1.4v2z" class="clr-i-outline clr-i-outline-path-3"/><path fill="none" d="M0 0h36v36H0z"/></svg>
         </button>
 
-        <button type="button" class="option__item" title="General Settings">
+        <button type="button" class="option__item" title="General Settings" @click="settingsPopup = !settingsPopup">
         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path d="M19 3v4m0 14V11m-7-8v12m0 6v-2M5 3v2m0 16V9"/><circle cx="19" cy="9" r="2" transform="rotate(90 19 9)"/><circle cx="12" cy="17" r="2" transform="rotate(90 12 17)"/><circle cx="5" cy="7" r="2" transform="rotate(90 5 7)"/></g></svg>
         </button>
     </div>
+
+    <div class="popup-wrapper" :class="settingsPopup ? 'opened' : ''">
+      <div class="popup">
+        <div class="popup-header">
+          <span>App Settings</span>
+          <button class="close-popup" @click="settingsPopup = false"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M13.41 12l4.3-4.29a1 1 0 1 0-1.42-1.42L12 10.59l-4.29-4.3a1 1 0 0 0-1.42 1.42l4.3 4.29l-4.3 4.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l4.29-4.3l4.29 4.3a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.42z"/></svg></button>
+        </div>
+        <div class="popup-content">
+          <div class="settings-popup-inner form">
+
+            <div class="settings__item">
+                <label for="range">Audio Sound</label>
+                <div class="form__range" data-adev-range>
+                    <input type="range" max="100" min="1" value="100" data-unit="%" id="range">
+                    <output class="form__range-value" data-adev-range-value>100%</output>
+                </div>
+            </div>
+
+            <div class="settings__item">
+                <p>More settings coming soon Inshallah!</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
 </template>
 
 <script>
 export default {
     name: "Options",
+    data(){
+        return {
+            settingsPopup: false
+        }
+    },
     methods: {
         toggleDarkMode(){
             let htmlClass = document.querySelector('html').classList
@@ -39,7 +71,37 @@ export default {
                 htmlClass.add('mode:light')
                 htmlClass.remove('mode:dark')
             }
+        },
+        rangeSlider(){
+            var self = this
+            var update_range_value = function(input, value_tooltip){
+                var val = input.value,
+                min = input.getAttribute('min') || 0,
+                max = input.getAttribute('max') || 100,
+                unit = input.dataset.unit || '',
+                newVal = Number(((val - min) * 100) / (max - min));
+                
+                let volume = val == 100 ? 1 : parseFloat("0." + val);
+                self.$store.commit('setAudioVolume', volume)
+
+                value_tooltip.textContent = val + unit;
+                value_tooltip.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`
+            }
+
+            let ranges = document.querySelectorAll('[data-adev-range]');
+            ranges.forEach(range => {
+                let input = range.querySelector("input[type='range']")
+                var value_tooltip = range.querySelector("[data-adev-range-value]");
+                update_range_value(input, value_tooltip)
+
+                input.addEventListener('input', function(){
+                    update_range_value(input, value_tooltip)
+                })
+            })
         }
+    },
+    mounted(){
+        this.rangeSlider();
     }
 }
 </script>

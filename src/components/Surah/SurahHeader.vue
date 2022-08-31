@@ -105,8 +105,14 @@ export default {
             return chapterInfo[0];
         },
         currentSurah(){
+            this.playingSurah = false
             return this.$store.getters.getCurrentSurah
         }
+    },
+    watch: {
+        "$store.getters.getAudioVolume"(volume) {
+            this.$refs.surahPlayer.volume = volume
+        },
     }
 }
 </script>
