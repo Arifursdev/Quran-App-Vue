@@ -95,6 +95,17 @@ export default {
     app.fetchChapters();
     app.urlParamRoute();
   
+    let savedTranslators = localStorage.getItem('adevSavedTranslators')
+    if(savedTranslators === null) {
+      savedTranslators = localStorage.setItem('adevSavedTranslators', [22, 131, 20])
+    }
+
+    savedTranslators = savedTranslators.split(',')
+
+    savedTranslators.forEach(id => {
+      app.$store.commit('setActiveTranslator', parseInt(id))
+    })
+
   }
 }
 </script>

@@ -103,7 +103,22 @@ export default {
 
         if(!dataExists) {
 
-          app.axios.get( 'https://api.qurancdn.com/api/qdc/verses/by_chapter/'+ currentSurah +'?words=true&translation_fields=resource_name%2Clanguage_id&per_page=500&fields=chapter_id&translations=20%2C131&reciter=7&word_translation_language=en&page=1&word_fields=verse_key%2Cverse_id%2Cpage_number%2Clocation%2Ctext_uthmani%2Ctajweed%2Cqpc_uthmani_hafs&mushaf=11' )
+          let url = new URL('https://api.qurancdn.com/api/qdc/verses/by_chapter/'+ currentSurah)
+          let urlParam = url.searchParams;
+          
+          urlParam.set('words', true)
+          urlParam.set('translation_fields', 'resource_name,language_id')
+          urlParam.set('per_page', 500)
+          urlParam.set('fields', 'text_uthmani,chapter_id,hizb_number,text_imlaei_simple')
+          let translations = localStorage.getItem('adevSavedTranslators');
+          urlParam.set('translations', translations === null ? '20,131,22,85,17,19,167,95,171,57,163,122' : translations)
+          urlParam.set('reciter', 3)
+          urlParam.set('word_translation_language', 'en')
+          urlParam.set('page', 1)
+          urlParam.set('word_fields', 'verse_key,verse_id,page_number,location,text_uthmani,tajweed,qpc_uthmani_hafs')
+          urlParam.set('mushaf', 11)
+
+          app.axios.get( url.href )
           .then(function(resp){
             var verses = resp.data.verses;
             var data = [];

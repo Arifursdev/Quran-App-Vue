@@ -1,9 +1,9 @@
 $form_primary: #0e0e0e;
 
-$form_text_color:#0e0e0e;
+$form_text_color:var(--text-color);
 $form_input_bg: #fff;
 $form_input_brdr: #ddd;
-$form_input_color:#0e0e0e;
+$form_input_color: var(--text-color);
 $form_label_font_size:15px;
 $form_field_font_size:14px;
 $form_padding: 13px 16px;

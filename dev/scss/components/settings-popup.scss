@@ -11,6 +11,17 @@
         &:not(:last-child):not(:only-child) {
             margin-bottom: 15px;
         }
+        
+        & > label {
+            font-weight: bold;
+        }
+
+        .form__field-checkbox {
+            margin-top: 15px;
+            label {
+                font-size: 14px;
+            }
+        }
     }
 
 }

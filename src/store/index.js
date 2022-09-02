@@ -8,7 +8,64 @@ const store = createStore({
       chaptersData: [],
       searchQuery: '',
       sort: 'ASC',
-      audioVolume: 1
+      audioVolume: 1,
+      translators: [
+        {
+            id: 85,
+            name: 'Abdul Haleem',
+            active: false
+        },
+        {
+            id: 22,
+            name: 'Abdullah Yusuf Ali',
+            active: false
+        },
+        {
+            id: 17,
+            name: 'Dr. Ghali',
+            active: false
+        },
+        {
+            id: 131,
+            name: 'Dr. Mustafa Khattab',
+            active: false
+        },
+        {
+            id: 19,
+            name: 'English Translation (Pickthall)',
+            active: false
+        },
+        {
+            id: 167,
+            name: 'Maarif-ul-Quran',
+            active: false
+        },
+        {
+            id: 20,
+            name: 'Saheeh International',
+            active: false
+        },
+        {
+            id: 95,
+            name: 'Tafheem-ul-Quran - Abul Ala Maududi',
+            active: false
+        },
+        {
+            id: 171,
+            name: 'Abridged Explanation of the Quran',
+            active: false
+        },
+        {
+            id: 57,
+            name: 'Transliteration',
+            active: false
+        },
+        {
+            id: 163,
+            name: 'Sheikh Mujibur Rahman',
+            active: false
+        }
+      ]
     }
   },
   getters: {
@@ -64,6 +121,9 @@ const store = createStore({
     },
     getAudioVolume(state){
       return state.audioVolume
+    },
+    getTranslators(state){
+      return state.translators
     }
   },
   mutations: {
@@ -84,6 +144,13 @@ const store = createStore({
     },
     setAudioVolume(state, payload) {
       state.audioVolume = payload
+    },
+    setActiveTranslator(state, id){
+      state.translators = state.translators.map(translator => {
+        if(translator.id === id) translator.active = !translator.active;
+
+        return translator;
+      })
     }
   },
   actions: {
