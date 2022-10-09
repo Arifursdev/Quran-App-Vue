@@ -1,5 +1,5 @@
 <template>
-    <div class="surah__verse">
+    <div class="surah__verse" :id="'verse_' + (index + 1)" :data-verse-id="verse.id" :data-index="index">
         <div class="verse__header">
 
             <span class="verse__no">{{ verse.verse_key }}</span>
@@ -37,6 +37,9 @@
 <script>
 export default {
     name: "Verse",
-    props: ['verse']
+    props: ['verse', 'index'],
+    mounted(){
+        this.$emit('verseMounted')
+    }
 }
 </script>

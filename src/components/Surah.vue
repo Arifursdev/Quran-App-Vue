@@ -6,7 +6,7 @@
       <Loading v-if="!currentSurahVerses"/>
       <template v-if="currentSurahVerses">
 
-        <Verse v-for="verse in currentSurahVerses" :verse="verse" :key="verse.verse_number"/>
+        <Verse v-for="(verse, index) in currentSurahVerses" @verseMounted="verseMounted" :index="index" :verse="verse" :key="verse.verse_number"/>
         
         <div class="chapters__pagination" v-if="showPagination">
             <button type="button" @click="changeChapter('prev')" v-if="currentSurah > 0" class="prev__chapter"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M13.75 16.25a.74.74 0 0 1-.53-.22l-3.5-3.5a.75.75 0 0 1 0-1.06L13.22 8a.75.75 0 0 1 1.06 1l-3 3l3 3a.75.75 0 0 1 0 1.06a.74.74 0 0 1-.53.19Z"/></svg> Prev Chapter</button>
@@ -41,6 +41,7 @@ export default {
     data(){
       return {
         showGoToTop: false,
+        verseMountedTimeout: null
       }
     },
     methods: {
@@ -63,6 +64,46 @@ export default {
         let url = new URL(window.location);
         url.searchParams.set('id', nextSurah);
         window.history.pushState({}, '', url);
+      },
+      verseMounted: function(){
+        clearTimeout(this.verseMountedTimeout)
+        this.verseMountedTimeout = setTimeout(function(){
+
+          let url = new URL(window.location.href).searchParams
+          let verse = parseInt(url.get('verse'));
+          let header = document.querySelector('.surah__header')
+          let surah = document.querySelector('.surah-wrapper')
+          let verseDiv = document.querySelector('#verse_' + verse)
+
+          if(verse !== NaN && surah && verseDiv && header) {
+            let desktopOffset = verseDiv.offsetTop - header.clientHeight;
+            let mobileOffset = verseDiv.offsetTop;
+            window.outerWidth < 769 ? window.scrollTo(0, mobileOffset) : surah.scrollTo(0, desktopOffset)
+          }
+
+          const targets = document.querySelectorAll('.surah__verse');
+          const setVerseReadHistory = target => {
+              const io = new IntersectionObserver((entries, observer) => {
+                  entries.forEach(entry => {
+                    console.log(entry);
+                      if (entry.isIntersecting) {
+                          let element = entry.target;
+                          let id = element.dataset.index
+                          
+                          let url = new URL(window.location);
+                          url.searchParams.set('verse', id);
+                          window.history.pushState({}, '', url);
+                      }
+                  });
+              });
+              
+              io.observe(target)
+          };
+          
+          targets.forEach(setVerseReadHistory);
+
+
+        }, 150)
       }
     },
     computed: {
@@ -125,6 +166,7 @@ export default {
 
             verses.forEach(verse => {
                 data.push({
+                    'id' : verse.id,
                     'verse_number' : verse.verse_number,
                     'chapter_id' : verse.chapter_id,
                     'verse_key' : verse.verse_key,
