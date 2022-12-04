@@ -69,14 +69,11 @@ export default {
             surahPlayer.addEventListener('timeupdate', function(){
                 var percent = surahPlayer.currentTime/ surahPlayer.duration * 100;
 
+                
                 var mins = Math.floor(surahPlayer.currentTime / 60);
-                    if (mins < 10) {
-                    mins = '0' + String(mins);
-                }
                 var secs = Math.floor(surahPlayer.currentTime % 60);
-                    if (secs < 10) {
-                    secs = '0' + String(secs);
-                }
+
+                console.log(mins + ':' + secs);
 
             });
         }
@@ -113,6 +110,16 @@ export default {
         "$store.getters.getAudioVolume"(volume) {
             this.$refs.surahPlayer.volume = volume
         },
+    },
+    created(){
+        var self = this
+        document.addEventListener('quran:play_verse', function(e){
+          let duration = parseFloat(e.detail)
+          let surahPlayer = self.$refs.surahPlayer;
+          surahPlayer.pause();
+          surahPlayer.currentTime = duration;
+          surahPlayer.play();
+        });
     }
 }
 </script>

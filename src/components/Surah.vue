@@ -85,7 +85,6 @@ export default {
           const setVerseReadHistory = target => {
               const io = new IntersectionObserver((entries, observer) => {
                   entries.forEach(entry => {
-                    console.log(entry);
                       if (entry.isIntersecting) {
                           let element = entry.target;
                           let id = element.dataset.index
@@ -104,6 +103,17 @@ export default {
 
 
         }, 150)
+      },
+      millisToMinutesAndSeconds(millis) {
+        var minutes = Math.floor(millis / 60000);
+        var seconds = ((millis % 60000) / 1000).toFixed(0);
+        var mseconds = millis.toFixed(0);
+
+        if(minutes == 0) {
+          return seconds;
+        }
+
+        return minutes + "." + seconds;
       }
     },
     computed: {
@@ -171,6 +181,7 @@ export default {
                     'chapter_id' : verse.chapter_id,
                     'verse_key' : verse.verse_key,
                     'translations' : verse.translations,
+                    'timestamps' : app.millisToMinutesAndSeconds(verse.timestamps.timestamp_from)
                 })
             });
 
