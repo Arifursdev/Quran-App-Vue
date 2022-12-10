@@ -113,7 +113,9 @@ export default {
           return seconds;
         }
 
-        return minutes + "." + seconds;
+        // more than 1min
+        seconds = parseFloat(minutes * 60) + parseFloat(seconds);
+        return seconds;
       }
     },
     computed: {
@@ -181,7 +183,7 @@ export default {
                     'chapter_id' : verse.chapter_id,
                     'verse_key' : verse.verse_key,
                     'translations' : verse.translations,
-                    'timestamps' : app.millisToMinutesAndSeconds(verse.timestamps.timestamp_from)
+                    'timestamps_from' : app.millisToMinutesAndSeconds(verse.timestamps.timestamp_from)
                 })
             });
 

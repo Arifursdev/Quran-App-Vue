@@ -56,12 +56,15 @@ export default {
             
             let surahPlayer = self.$refs.surahPlayer;
 
-            if (surahPlayer.paused) {
-                surahPlayer.play();
-            } else {
-                surahPlayer.pause();
-            }
-
+            
+            surahPlayer.addEventListener('play', function(){
+                self.playingSurah = true
+            })
+            
+            surahPlayer.addEventListener('pause', function(){
+                self.playingSurah = false
+            })
+            
             surahPlayer.addEventListener('ended', function(){
                 self.playingSurah = false
             })
@@ -76,6 +79,12 @@ export default {
                 console.log(mins + ':' + secs);
 
             });
+
+            if (surahPlayer.paused) {
+                surahPlayer.play();
+            } else {
+                surahPlayer.pause();
+            }
         }
     },
     computed: {
@@ -115,6 +124,7 @@ export default {
         var self = this
         document.addEventListener('quran:play_verse', function(e){
           let duration = parseFloat(e.detail)
+          console.log('duration: ', duration);
           let surahPlayer = self.$refs.surahPlayer;
           surahPlayer.pause();
           surahPlayer.currentTime = duration;
