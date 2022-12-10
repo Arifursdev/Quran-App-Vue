@@ -105,10 +105,18 @@ export default {
 
         surahPlayer.addEventListener('pause', function(){
             self.playingSurah = false
+            var playing = document.querySelector('.surah__verse.playing');
+            if(playing) {
+                playing.classList.remove('playing')
+            }
         })
 
         surahPlayer.addEventListener('ended', function(){
             self.playingSurah = false
+            var playing = document.querySelector('.surah__verse.playing');
+            if(playing) {
+                playing.classList.remove('playing')
+            }
         })
 
         surahPlayer.addEventListener('playing', function(e){
