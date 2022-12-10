@@ -175,6 +175,14 @@
             padding-left: 10px;
         }
         
+        &.playing button.verse__option svg.verse__option-play {
+            display: none;
+        }
+        
+        &:not(.playing) button.verse__option svg.verse__option-playing {
+            display: none;
+        }
+
         .verse__options {
             button.verse__option {
                 width: 40px;

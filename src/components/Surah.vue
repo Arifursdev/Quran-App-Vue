@@ -104,10 +104,9 @@ export default {
 
         }, 150)
       },
-      millisToMinutesAndSeconds(millis) {
+      millisToSeconds(millis) {
         var minutes = Math.floor(millis / 60000);
         var seconds = ((millis % 60000) / 1000).toFixed(0);
-        var mseconds = millis.toFixed(0);
 
         if(minutes == 0) {
           return seconds;
@@ -176,14 +175,16 @@ export default {
             var verses = resp.data.verses;
             var data = [];
 
-            verses.forEach(verse => {
-                data.push({
+            verses.forEach((verse, index, currentArray) => {
+                let nextItem = currentArray[index + 1] !== undefined ? currentArray[index + 1] : null;
+                data.push({ 
                     'id' : verse.id,
                     'verse_number' : verse.verse_number,
                     'chapter_id' : verse.chapter_id,
                     'verse_key' : verse.verse_key,
                     'translations' : verse.translations,
-                    'timestamps_from' : app.millisToMinutesAndSeconds(verse.timestamps.timestamp_from)
+                    'timestamps_from' : app.millisToSeconds(verse.timestamps.timestamp_from),
+                    'next_timestamps_from' : nextItem !== null ? app.millisToSeconds(nextItem.timestamps.timestamp_from) : null
                 })
             });
 

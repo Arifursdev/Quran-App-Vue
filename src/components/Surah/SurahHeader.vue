@@ -55,31 +55,6 @@ export default {
             self.playingSurah = !self.playingSurah
             
             let surahPlayer = self.$refs.surahPlayer;
-
-            
-            surahPlayer.addEventListener('play', function(){
-                self.playingSurah = true
-            })
-            
-            surahPlayer.addEventListener('pause', function(){
-                self.playingSurah = false
-            })
-            
-            surahPlayer.addEventListener('ended', function(){
-                self.playingSurah = false
-            })
-
-            surahPlayer.addEventListener('timeupdate', function(){
-                var percent = surahPlayer.currentTime/ surahPlayer.duration * 100;
-
-                
-                var mins = Math.floor(surahPlayer.currentTime / 60);
-                var secs = Math.floor(surahPlayer.currentTime % 60);
-
-                console.log(mins + ':' + secs);
-
-            });
-
             if (surahPlayer.paused) {
                 surahPlayer.play();
             } else {
@@ -119,6 +94,66 @@ export default {
         "$store.getters.getAudioVolume"(volume) {
             this.$refs.surahPlayer.volume = volume
         },
+    },
+    mounted(){
+        var self = this
+        let surahPlayer = self.$refs.surahPlayer;
+
+        surahPlayer.addEventListener('play', function(){
+            self.playingSurah = true
+        })
+
+        surahPlayer.addEventListener('pause', function(){
+            self.playingSurah = false
+        })
+
+        surahPlayer.addEventListener('ended', function(){
+            self.playingSurah = false
+        })
+
+        surahPlayer.addEventListener('playing', function(e){
+            console.log(e);
+        })
+
+        surahPlayer.addEventListener('timeupdate', function(){
+            var percent = surahPlayer.currentTime / surahPlayer.duration * 100;
+
+            var minutes = Math.floor(surahPlayer.currentTime / 60);
+            var seconds = Math.floor(surahPlayer.currentTime % 60);
+
+            if(minutes !== 0) {
+                seconds = parseFloat(minutes * 60) + parseFloat(seconds);
+            }
+
+            // responsive play icon to audio , temp solution, remove if performance issue
+            var currentSurah = self.$store.getters.getCurrentSurah
+            var currentSurahData = self.$store.getters.getChapterDataByID(currentSurah);
+
+            var currentSurahData = currentSurahData.filter(item => {
+                return item.timestamps_from < seconds;
+            })
+
+            currentSurahData = currentSurahData[currentSurahData.length - 1]
+
+            if(currentSurahData !== undefined) {
+
+                var verse = document.querySelector('.surah__verse');
+                if(verse) {
+                    var playing = document.querySelector('.surah__verse.playing:not([data-verse-id="'+ currentSurahData.id +'"])');
+                    if(playing) {
+                        playing.classList.remove('playing')
+                    }
+
+                    var verse = document.querySelector('.surah__verse[data-verse-id="'+ currentSurahData.id +'"]');
+                    verse.classList.add('playing')
+                }
+
+            }
+            // responsive play icon to audio , temp solution ends, remove if performance issue
+
+            
+
+        });
     },
     created(){
         var self = this
