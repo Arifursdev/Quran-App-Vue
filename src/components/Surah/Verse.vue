@@ -17,9 +17,14 @@
 
         </div>
 
+        <!-- previously was -->
+        <!-- 
+        'https://df61994948e9a54a5259-ad04094bac72ed4d481dba65a1920e88.ssl.cf1.rackcdn.com/'+ verse.verse_key.replace(':', '_') +'.png'
+        'https://arifursdev.com/verses/'+ currentSurahID + '/' + verse.verse_key.replace(':', '_') +'.png'
+         -->
         <div class="verse__content">
             <div class="verse__arabic invert_if_dark">
-            <img class="lazyload" :data-src="'https://df61994948e9a54a5259-ad04094bac72ed4d481dba65a1920e88.ssl.cf1.rackcdn.com/'+ verse.verse_key.replace(':', '_') +'.png'" alt="">
+            <img class="lazyload" :data-src="'https://arifursdev.com/verses/'+ currentSurahID + '/' + verse.verse_key.replace(':', '_') +'.png'" alt="">
             </div>
             <div class="verse__translations">
             
@@ -37,7 +42,7 @@
 <script>
 export default {
     name: "Verse",
-    props: ['verse', 'index'],
+    props: ['verse', 'index', 'currentSurahID'],
     methods: {
         playVerse(duration){
             document.dispatchEvent(new CustomEvent('quran:play_verse', {

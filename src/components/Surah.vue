@@ -6,7 +6,7 @@
       <Loading v-if="!currentSurahVerses"/>
       <template v-if="currentSurahVerses">
 
-        <Verse v-for="(verse, index) in currentSurahVerses" @verseMounted="verseMounted" :index="index" :verse="verse" :key="verse.verse_number"/>
+        <Verse v-for="(verse, index) in currentSurahVerses" @verseMounted="verseMounted" :index="index" :verse="verse" :currentSurahID="currentSurahID" :key="verse.verse_number"/>
         
         <div class="chapters__pagination" v-if="showPagination">
             <button type="button" @click="changeChapter('prev')" v-if="currentSurah > 0" class="prev__chapter"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M13.75 16.25a.74.74 0 0 1-.53-.22l-3.5-3.5a.75.75 0 0 1 0-1.06L13.22 8a.75.75 0 0 1 1.06 1l-3 3l3 3a.75.75 0 0 1 0 1.06a.74.74 0 0 1-.53.19Z"/></svg> Prev Chapter</button>
@@ -118,6 +118,9 @@ export default {
       }
     },
     computed: {
+      currentSurahID(){
+        return this.$store.getters.getCurrentSurah;
+      },
       currentSurah(){
         let currentSurah = this.$store.getters.getCurrentSurah;
         var chapters = this.$store.getters.getChapters;
