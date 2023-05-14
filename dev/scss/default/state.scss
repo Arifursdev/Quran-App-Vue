@@ -29,7 +29,11 @@ $state__details_line-height: 1.6em;
         width: $state__icon-size;
         height: $state__icon-size;
         margin: 0 auto;
-        animation: rotate360 1s infinite linear;
+        
+        &.loading {
+            animation: rotate360 1s infinite linear;
+        }
+
         svg {
             width: $state__icon-size;
             height: $state__icon-size;

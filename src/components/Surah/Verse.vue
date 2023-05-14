@@ -5,7 +5,7 @@
             <span class="verse__no">{{ verse.verse_key }}</span>
 
             <div class="verse__options">
-            <button type="button" class="verse__option" title="Share">
+            <button type="button" class="verse__option" title="Share" @click="shareVerse(verse)">
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36"><path fill="currentColor" d="M27.53 24a5 5 0 0 0-3.6 1.55l-12.19-6.1a4.47 4.47 0 0 0 0-2.8l12.21-6.21a5.12 5.12 0 1 0-1.07-1.7l-12.09 6.15a5 5 0 1 0 0 6.33l12.06 6.07a4.93 4.93 0 0 0-.31 1.71a5 5 0 1 0 5-5Zm0-20a3 3 0 1 1-3 3a3 3 0 0 1 3-3ZM7 21a3 3 0 1 1 3-3a3 3 0 0 1-3 3Zm20.53 11a3 3 0 1 1 3-3a3 3 0 0 1-3 3Z" class="clr-i-outline clr-i-outline-path-1"/><path fill="none" d="M0 0h36v36H0z"/></svg>
             </button>
 
@@ -48,6 +48,21 @@ export default {
             document.dispatchEvent(new CustomEvent('quran:play_verse', {
                 detail: duration
             }));
+        },
+        shareVerse(verse){
+            if(navigator.clipboard) {
+                let url = new URL(window.location);
+                url.searchParams.set('verse', verse.id);
+
+                navigator.clipboard.writeText(url)
+                .then(() => {
+                    alert('Link copied!')
+                })
+                .catch((err) => {
+                    alert('Something went wrong!')
+                });
+            }
+            
         }
     },
     mounted(){
