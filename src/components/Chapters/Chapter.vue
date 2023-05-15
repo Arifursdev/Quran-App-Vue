@@ -56,7 +56,15 @@ export default {
       let url = new URL(window.location);
       url.searchParams.set('id', this.$props.chapter.chapter_number);
       url.searchParams.set('verse', 0);
-      window.open(url, "_blank");
+
+      var evLink = document.createElement('a');
+      evLink.href = url;
+      evLink.target = '_blank';
+      document.body.appendChild(evLink);
+      evLink.click();
+      evLink.parentNode.removeChild(evLink);
+
+      // window.open(url, "_blank");
     },
     startHold() {
       this.holdTimeout = setTimeout(() => {
