@@ -103,6 +103,7 @@ export default {
             this.searchQuery = term;
 
             if(term === '') {
+                selfthis.hardShowLoadingState = false;
                 return;
             }
 

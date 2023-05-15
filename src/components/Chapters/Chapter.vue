@@ -2,6 +2,12 @@
   <div 
     :data-id="chapter.chapter_number" 
     class="chapter__item" 
+    @mousedown="startHold"
+    @touchstart="startHold"
+    @mouseup="endHold"
+    @touchend="endHold"
+    @mouseleave="cancelHold"
+    @touchcancel="cancelHold"
     @click="selectSurah(chapter.chapter_number)" 
     :class="isCurrentSurah === chapter.chapter_number ? 'active' : ''">
         <span class="chapter__no">{{ chapter.chapter_number }}</span>
@@ -17,6 +23,12 @@ export default {
   props: [
     'chapter'
   ],
+  data(){
+    return {
+      holdTimeout: null,
+      isHolding: false,
+    }
+  },
   methods: {
     selectSurah(id){
       this.$store.commit('setCurrentSurah', id)
@@ -39,7 +51,29 @@ export default {
               });
             }, 300) 
         }
-    }
+    },
+    openSurahInNewTab(){
+      let url = new URL(window.location);
+      url.searchParams.set('id', this.$props.chapter.chapter_number);
+      url.searchParams.set('verse', 0);
+      window.open(url, "_blank");
+    },
+    startHold() {
+      this.holdTimeout = setTimeout(() => {
+        this.isHolding = true;
+        this.openSurahInNewTab();
+      }, 500);
+    },
+    endHold() {
+      clearTimeout(this.holdTimeout);
+      if (this.isHolding) {
+        this.isHolding = false;
+      }
+    },
+    cancelHold() {
+      clearTimeout(this.holdTimeout);
+      this.isHolding = false;
+    },
   },
   computed: {
     isCurrentSurah(){
