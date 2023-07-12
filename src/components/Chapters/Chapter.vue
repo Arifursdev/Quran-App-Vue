@@ -2,14 +2,9 @@
   <div 
     :data-id="chapter.chapter_number" 
     class="chapter__item" 
-    @mousedown="startHold"
-    @touchstart="startHold"
-    @mouseup="endHold"
-    @touchend="endHold"
-    @mouseleave="cancelHold"
-    @touchcancel="cancelHold"
     @click="selectSurah(chapter.chapter_number)" 
     :class="isCurrentSurah === chapter.chapter_number ? 'active' : ''">
+        <a @click.prevent="selectSurah(chapter.chapter_number)" :href="getSurahLink(chapter)"></a>
         <span class="chapter__no">{{ chapter.chapter_number }}</span>
         <span class="chapter__name">{{ chapter.name_simple }}</span>
         <p class="chapter__name-translation">{{ chapter.translated_name.name }}</p>
@@ -66,22 +61,9 @@ export default {
 
       // window.open(url, "_blank");
     },
-    startHold() {
-      this.holdTimeout = setTimeout(() => {
-        this.isHolding = true;
-        this.openSurahInNewTab();
-      }, 500);
-    },
-    endHold() {
-      clearTimeout(this.holdTimeout);
-      if (this.isHolding) {
-        this.isHolding = false;
-      }
-    },
-    cancelHold() {
-      clearTimeout(this.holdTimeout);
-      this.isHolding = false;
-    },
+    getSurahLink(chapter){
+      return '?id=' + chapter.chapter_number
+    }
   },
   computed: {
     isCurrentSurah(){
