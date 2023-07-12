@@ -18,12 +18,6 @@ export default {
   props: [
     'chapter'
   ],
-  data(){
-    return {
-      holdTimeout: null,
-      isHolding: false,
-    }
-  },
   methods: {
     selectSurah(id){
       this.$store.commit('setCurrentSurah', id)
