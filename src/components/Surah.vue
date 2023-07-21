@@ -145,14 +145,36 @@ export default {
           url.searchParams.set('id', currentSurah);
           window.history.pushState({}, '', url);
         } else {
-          var id = parseInt(url.searchParams.get('id')),
-          id = id > 0 && id < 115 ? id : 1;
 
-          url.searchParams.set('id', id);
-          window.history.pushState({}, '', url);
-          if(id !== currentSurah) {
-            this.$store.commit('setCurrentSurah', id)
+
+          let verse_ = id + ''
+          if(verse_.includes(':')) {
+
+            let chapter = parseInt(verse_.split(':')[0])
+            let verse = parseInt(verse_.split(':')[1])
+
+            url.searchParams.set('id', chapter);
+            url.searchParams.set('verse', verse);
+            window.history.pushState({}, '', url);
+
+            if(id !== currentSurah) {
+                this.$store.commit('setCurrentSurah', chapter)
+            }
+
+          } else {
+
+            var id = parseInt(url.searchParams.get('id')),
+            id = id > 0 && id < 115 ? id : 1;
+
+            url.searchParams.set('id', id);
+            window.history.pushState({}, '', url);
+            if(id !== currentSurah) {
+              this.$store.commit('setCurrentSurah', id)
+            }
+
           }
+          
+          
         }
         
 

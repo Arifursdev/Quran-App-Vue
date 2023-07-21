@@ -59,9 +59,25 @@ export default {
         var id = url.searchParams.get('id');
 
         if(id !== null) {
-          id = parseInt(id)
-          id = id > 0 && id < 115 ? id : 1;
-          app.$store.commit('setCurrentSurah', id)
+
+          let verse_ = id + ''
+          if(verse_.includes(':')) {
+
+            let chapter = parseInt(verse_.split(':')[0])
+            let verse = parseInt(verse_.split(':')[1])
+
+            url.searchParams.set('id', chapter);
+            url.searchParams.set('verse', verse);
+            window.history.pushState({}, '', url);
+
+            app.$store.commit('setCurrentSurah', chapter)
+          } else {
+            id = parseInt(id)
+            id = id > 0 && id < 115 ? id : 1;
+            app.$store.commit('setCurrentSurah', id)
+          }
+
+          
         }
       }
 
