@@ -142,9 +142,6 @@ export default {
             return this.results;
         },
         showEmptyState(){
-            console.log(this.showLoadingState == false);
-            console.log(this.searchQuery !== null);
-            console.log(this.results.length === 0);
             return this.showLoadingState == false && this.searchQuery !== '' && this.results.length === 0;
         }
     }

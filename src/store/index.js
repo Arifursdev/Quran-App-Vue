@@ -102,7 +102,13 @@ const store = createStore({
       }
 
       var results = state.chaptersList.filter(chapter => {
-        return chapter.name_simple.toLowerCase().includes(query.toLowerCase()) 
+        const chapterNameEn = chapter.name_simple.toLowerCase();
+        const translatedNameEn = chapter.translated_name.name.toLowerCase();
+        const q = query.toLowerCase()
+
+        if(chapterNameEn.includes(q) || translatedNameEn.includes(q) ) {
+          return true;
+        }
       });
 
       return results;
