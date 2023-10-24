@@ -9,6 +9,7 @@ const store = createStore({
       searchQuery: '',
       sort: 'ASC',
       audioVolume: 1,
+      audioSpeed: 1,
       translators: [
         {
             id: 85,
@@ -128,6 +129,9 @@ const store = createStore({
     getAudioVolume(state){
       return state.audioVolume
     },
+    getAudioSpeed(state){
+      return state.audioSpeed
+    },
     getTranslators(state){
       return state.translators
     }
@@ -150,6 +154,9 @@ const store = createStore({
     },
     setAudioVolume(state, payload) {
       state.audioVolume = payload
+    },
+    setAudioSpeed(state, payload) {
+      state.audioSpeed = payload
     },
     setActiveTranslator(state, id){
       state.translators = state.translators.map(translator => {

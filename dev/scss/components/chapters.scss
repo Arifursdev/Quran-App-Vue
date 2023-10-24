@@ -147,6 +147,7 @@
         padding: 20px;
         background: var(--background);
         position: relative;
+        scroll-behavior: smooth;
 
         .chapters__sorted-by {
             margin-bottom: 10px;

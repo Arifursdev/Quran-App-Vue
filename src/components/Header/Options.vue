@@ -55,10 +55,18 @@
           <div class="settings-popup-inner form">
 
             <div class="settings__item">
-                <label for="range">Audio Sound</label>
+                <label for="audioSound">Audio Sound</label>
                 <div class="form__range" data-adev-range>
-                    <input type="range" max="100" min="1" value="100" data-unit="%" id="range">
-                    <output class="form__range-value" data-adev-range-value>100%</output>
+                    <input type="range" max="100" min="1" value="100" data-unit="%" id="audioSound" v-model="audioSound">
+                    <output class="form__range-value" v-text="audioSound + '%'"></output>
+                </div>
+            </div>
+
+            <div class="settings__item">
+                <label for="audioSpeed">Audio Speed</label>
+                <div class="form__range" data-adev-range>
+                    <input type="range" min="0.5" max="1.5" step="0.1" data-unit="%" id="audioSpeed" v-model="audioSpeed">
+                    <output class="form__range-value" v-text="audioSpeed + 'x'"></output>
                 </div>
             </div>
 
@@ -78,6 +86,8 @@ export default {
     name: "Options",
     data(){
         return {
+            audioSound: 100,
+            audioSpeed: 1,
             settingsPopup: false,
             languagePopup: false
         }
@@ -104,33 +114,6 @@ export default {
                 htmlClass.add('mode:light')
                 htmlClass.remove('mode:dark')
             }
-        },
-        rangeSlider(){
-            var self = this
-            var update_range_value = function(input, value_tooltip){
-                var val = input.value,
-                min = input.getAttribute('min') || 0,
-                max = input.getAttribute('max') || 100,
-                unit = input.dataset.unit || '',
-                newVal = Number(((val - min) * 100) / (max - min));
-                
-                let volume = val == 100 ? 1 : parseFloat("0." + val);
-                self.$store.commit('setAudioVolume', volume)
-
-                value_tooltip.textContent = val + unit;
-                value_tooltip.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`
-            }
-
-            let ranges = document.querySelectorAll('[data-adev-range]');
-            ranges.forEach(range => {
-                let input = range.querySelector("input[type='range']")
-                var value_tooltip = range.querySelector("[data-adev-range-value]");
-                update_range_value(input, value_tooltip)
-
-                input.addEventListener('input', function(){
-                    update_range_value(input, value_tooltip)
-                })
-            })
         },
         selectTranslator(id){
             var app = this
@@ -159,13 +142,24 @@ export default {
             })
         }
     },
+    watch: {
+        audioSound(newVal) {
+            newVal = parseFloat(newVal);
+            let volume = newVal < 10 ? newVal / 10 : newVal === 100 ? 1 : parseFloat('0.' + newVal);
+            this.$store.commit('setAudioVolume', volume);
+        },
+        audioSpeed(newVal) {
+            newVal = parseFloat(newVal);
+            this.$store.commit('setAudioSpeed', newVal);
+        },
+    },
     computed: {
         translators(){
             return this.$store.getters.getTranslators;
         }
     },
     mounted(){
-        this.rangeSlider();
+        
     }
 }
 </script>

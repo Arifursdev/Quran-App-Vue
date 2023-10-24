@@ -94,10 +94,19 @@ export default {
         "$store.getters.getAudioVolume"(volume) {
             this.$refs.surahPlayer.volume = volume
         },
+        "$store.getters.getAudioSpeed"(speed) {
+            this.$refs.surahPlayer.playbackRate = speed
+        },
     },
     mounted(){
         var self = this
         let surahPlayer = self.$refs.surahPlayer;
+
+        document.querySelector('html').style.setProperty('--surah-header-height', document.querySelector('.surah__header').scrollHeight + 'px')
+        setTimeout(function(){
+            document.querySelector('html').style.setProperty('--surah-header-height', document.querySelector('.surah__header').scrollHeight + 'px')
+        }, 500)
+        
 
         surahPlayer.addEventListener('play', function(){
             self.playingSurah = true
