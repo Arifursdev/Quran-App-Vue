@@ -23,7 +23,7 @@
             </button>
         </template>
 
-        <audio ref="surahPlayer" :src="'https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/' + currentSurah + '.mp3'"></audio>
+        <audio ref="surahPlayer" :loop="loop" :src="'https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/' + currentSurah + '.mp3'"></audio>
 
     </div>
 </template>
@@ -36,6 +36,7 @@ export default {
     data() {
         return {
             playingSurah: false,
+            loop: false
         }
     },
     components: {
@@ -96,6 +97,10 @@ export default {
         },
         "$store.getters.getAudioSpeed"(speed) {
             this.$refs.surahPlayer.playbackRate = speed
+        },
+        "$store.getters.getAudioLoop"(loop) {
+            this.loop = loop
+            this.$refs.surahPlayer.loop = loop
         },
     },
     mounted(){

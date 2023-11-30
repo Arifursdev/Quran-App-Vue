@@ -70,6 +70,12 @@
                 </div>
             </div>
 
+            <div class="settings__item form__field-checkbox">
+                <label for="audioLoop" class="form__label">
+                    <input type="checkbox" id="audioLoop" v-model="audioLoop" value="true"> Enable Loop
+                </label>
+            </div>
+
             <div class="settings__item">
                 <p>More settings coming soon Inshallah!</p>
             </div>
@@ -88,6 +94,7 @@ export default {
         return {
             audioSound: 100,
             audioSpeed: 1,
+            audioLoop: false,
             settingsPopup: false,
             languagePopup: false
         }
@@ -151,6 +158,9 @@ export default {
         audioSpeed(newVal) {
             newVal = parseFloat(newVal);
             this.$store.commit('setAudioSpeed', newVal);
+        },
+        audioLoop(newVal) {
+            this.$store.commit('setAudioLoop', newVal);
         },
     },
     computed: {
