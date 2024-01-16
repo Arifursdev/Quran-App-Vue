@@ -38,11 +38,6 @@ const store = createStore({
             active: false
         },
         {
-            id: 167,
-            name: 'Maarif-ul-Quran',
-            active: false
-        },
-        {
             id: 20,
             name: 'Saheeh International',
             active: false
@@ -66,7 +61,23 @@ const store = createStore({
             id: 163,
             name: 'Sheikh Mujibur Rahman',
             active: false
-        }
+        },
+        {
+            id: 162,
+            name: 'Rawai Al-bayan',
+            active: false
+        },
+        {
+            id: 213,
+            name: 'Dr. Abu Bakr Muhammad Zakaria',
+            active: false
+        },
+        {
+            id: 167,
+            name: 'Maarif-ul-Quran',
+            active: false
+        },
+
       ]
     }
   },
